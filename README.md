@@ -7,7 +7,7 @@ Status: **experimental** — not yet confirmed on a real Samsung TV. Report prob
 
 ## Install (Arabic steps with pictures: https://sohbatna.com/guides/samsung)
 
-1. Install TizenBrew on the TV with **TizenBrew Installer** (PC or Android): https://github.com/reisxd/TizenBrewInstaller
+1. Install TizenBrew on the TV with **TizenBrew Installer** on a computer (Windows: https://github.com/reisxd/TizenBrewInstaller/releases/latest/download/TizenBrewInstaller-win-x64.exe)
 2. On the TV open TizenBrew → module manager → add module, choose **GitHub** and enter:
 
    ```
