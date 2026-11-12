@@ -1,0 +1,69 @@
+/* Sohbatna 6.0 — F23 accent themes (Wave 5). Overrides tokens.css vars per html.accent-<name>.
+   Default (no class / accent-teal) matches tokens.json exactly — no visual change for existing users.
+   Contrast (vs --bg #0B1117 / WCAG 2.1 relative luminance): see docs/redesign-6.0 report for the table;
+   every accent >= 3:1 vs #0B1117, every --on-accent >= 4.5:1 on its accent. */
+
+/* Sohbatna 6.0 — F23 accent themes (Wave 5). Overrides tokens.css vars per html.accent-<name>.
+   7.0: default is now 'amber' (the new brand colour, matches tokens7 --accent #FFB224); teal/gold/
+   blue/wine/green remain selectable. Contrast (vs --bg): every accent >= 3:1 vs dark --bg,
+   every --on-accent >= 4.5:1 on its accent. */
+
+html.accent-amber, html:not([class*="accent-"]) {
+  --accent:#FFB224;
+  --accent-d:#FFB224;
+  --accent-rgb:255,178,36;
+  --on-accent:#1A1200;
+  --sh-glow:0 0 0 3px #FFB224, 0 0 34px -4px rgba(255,178,36,.55);
+  --sh-glow-lite:0 0 0 3px #FFB224;
+  --sh-play:0 10px 30px -8px rgba(255,178,36,.7);
+}
+
+html.accent-teal {
+  --accent:#46D8D1;
+  --accent-d:#1FA9A3;
+  --accent-rgb:70,216,209;
+  --on-accent:#05201F;
+  --sh-glow:0 0 0 3px #46D8D1, 0 0 34px -4px rgba(70,216,209,.55);
+  --sh-glow-lite:0 0 0 3px #46D8D1;
+  --sh-play:0 10px 30px -8px rgba(70,216,209,.7);
+}
+
+html.accent-gold {
+  --accent:#E8B339;
+  --accent-d:#B8860B;
+  --accent-rgb:232,179,57;
+  --on-accent:#241800;
+  --sh-glow:0 0 0 3px #E8B339, 0 0 34px -4px rgba(232,179,57,.55);
+  --sh-glow-lite:0 0 0 3px #E8B339;
+  --sh-play:0 10px 30px -8px rgba(232,179,57,.7);
+}
+
+html.accent-blue {
+  --accent:#4D9FFF;
+  --accent-d:#2E6FD1;
+  --accent-rgb:77,159,255;
+  --on-accent:#051226;
+  --sh-glow:0 0 0 3px #4D9FFF, 0 0 34px -4px rgba(77,159,255,.55);
+  --sh-glow-lite:0 0 0 3px #4D9FFF;
+  --sh-play:0 10px 30px -8px rgba(77,159,255,.7);
+}
+
+html.accent-wine {
+  --accent:#E2566E;
+  --accent-d:#B23A52;
+  --accent-rgb:226,86,110;
+  --on-accent:#230A12;
+  --sh-glow:0 0 0 3px #E2566E, 0 0 34px -4px rgba(226,86,110,.55);
+  --sh-glow-lite:0 0 0 3px #E2566E;
+  --sh-play:0 10px 30px -8px rgba(226,86,110,.7);
+}
+
+html.accent-green {
+  --accent:#4CD97B;
+  --accent-d:#2FAE5C;
+  --accent-rgb:76,217,123;
+  --on-accent:#05200F;
+  --sh-glow:0 0 0 3px #4CD97B, 0 0 34px -4px rgba(76,217,123,.55);
+  --sh-glow-lite:0 0 0 3px #4CD97B;
+  --sh-play:0 10px 30px -8px rgba(76,217,123,.7);
+}

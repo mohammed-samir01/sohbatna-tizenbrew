@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data: blob:; media-src * blob:; connect-src *; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; worker-src blob:">
+<title>صحبتنا</title>
+<link rel="stylesheet" href="tokens7.css">
+<link rel="stylesheet" href="tokens7-compat.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="screens6.css">
+<link rel="stylesheet" href="themes6.css">
+<link rel="stylesheet" href="theme7.css">
+</head>
+<body>
+<!-- ===== SPLASH ===== -->
+<div id="splash" class="splash">
+  <img class="logo" src="logo.svg" alt="">
+  <div class="wordmark">صحبتنا</div>
+  <div class="splash-bar"><i></i></div>
+</div>
+
+<!-- ===== LOGIN ===== -->
+<section id="login" class="screen hidden">
+  <div class="login-card">
+    <img class="logo" src="logo.svg" alt="صحبتنا">
+    <h1 class="wordmark">صحبتنا</h1>
+    <p class="muted">سجّل دخولك للوصول إلى محتواك</p>
+    <div class="seg l-type" id="l-type">
+      <button class="opt on" data-type="xtream">Xtream</button>
+      <button class="opt" data-type="m3u">M3U</button>
+      <button class="opt" data-type="stalker">MAC</button>
+    </div>
+    <div id="l-pane-xtream" class="l-pane">
+      <input id="l-label" placeholder="اسم الحساب (اختياري)">
+      <input id="l-server" placeholder="رابط السيرفر  http://host:port">
+      <input id="l-user" placeholder="اسم المستخدم" autocomplete="off">
+      <input id="l-pass" type="password" placeholder="كلمة المرور">
+    </div>
+    <div id="l-pane-m3u" class="l-pane hidden">
+      <input id="lm-label" placeholder="اسم الحساب (اختياري)">
+      <input id="lm-url" placeholder="رابط M3U  https://…/list.m3u">
+      <div class="row"><button id="lm-file-btn" class="chip" type="button">اختيار ملف من الجهاز</button><span id="lm-file-name" class="muted"></span></div>
+      <input type="file" id="lm-file" accept=".m3u,.m3u8,audio/x-mpegurl" class="hidden">
+      <input id="lm-epg" placeholder="رابط دليل البرامج EPG (اختياري)">
+    </div>
+    <div id="l-pane-stalker" class="l-pane hidden">
+      <input id="ls-label" placeholder="اسم الحساب (اختياري)">
+      <input id="ls-portal" placeholder="رابط البورتال  http://host:port">
+      <input id="ls-mac" placeholder="عنوان MAC  00:1A:79:xx:xx:xx" class="ltr">
+    </div>
+    <button id="l-btn" class="primary">دخول</button>
+    <div id="l-error" class="error"></div>
+    <button id="l-cancel" class="ghost hidden">إلغاء</button>
+    <p class="l-note">التطبيق مشغّل فقط ولا يقدّم أي قنوات أو محتوى. أضف بيانات اشتراكك القانوني لدى مزوّدك.</p>
+  </div>
+</section>
+
+<!-- ===== HOME ===== -->
+<section id="home" class="screen hidden">
+  <header>
+    <nav>
+      <div class="rail-brand"><img class="logo tiny" src="logo.svg" alt=""><b class="wordmark">صحبتنا</b></div>
+      <button data-sec="home" data-ic="home" class="tab active"><span class="lbl">الرئيسية</span></button>
+      <button data-sec="live" data-ic="live" class="tab"><span class="lbl">مباشر</span></button>
+      <button data-sec="guide" data-ic="guide" class="tab"><span class="lbl">دليل البرامج</span></button>
+      <button data-sec="matches" data-ic="trophy" class="tab"><span class="lbl">المباريات</span></button>
+      <button data-sec="movies" data-ic="movie" class="tab"><span class="lbl">أفلام</span></button>
+      <button data-sec="series" data-ic="series" class="tab"><span class="lbl">مسلسلات</span></button>
+      <button data-sec="favorites" data-ic="star" class="tab"><span class="lbl">المفضلة</span></button>
+      <button data-sec="continue" data-ic="resume" class="tab"><span class="lbl">استكمال</span></button>
+      <button id="account-tab" class="tab acct-only" data-ic="user" type="button"><span class="lbl">الحساب</span></button>
+      <div class="rail-foot" id="rail-foot">
+        <div class="actions">
+          <span id="kids-badge" class="badge hidden" data-ic="kids">وضع الأطفال</span>
+          <button id="profile-btn" class="chip" data-ic="user"><span id="profile-name"></span></button>
+          <button id="multi-btn" class="chip icon" data-ic="multi" aria-label="شاشات متعددة"><span class="lbl">شاشات متعددة</span></button>
+          <button id="settings-btn" class="chip icon" data-ic="settings" aria-label="الإعدادات"><span class="lbl">الإعدادات</span></button>
+          <button id="logout-btn" class="chip icon" data-ic="logout" aria-label="خروج"><span class="lbl">خروج</span></button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="toolbar">
+    <label class="search-wrap" data-ic="search"><input id="search" placeholder="ابحث"></label>
+    <div id="search-history" class="search-history hidden"></div>
+    <button id="layout-btn" class="chip sm" data-ic="settings" title="تخصيص الأقسام">تخصيص الأقسام</button>
+    <button id="filter-btn" class="chip" data-ic="filter">فلتر</button>
+    <span id="count" class="muted"></span>
+  </div>
+
+  <main>
+    <aside id="categories"></aside>
+    <div id="content-wrap">
+      <div id="content" class="grid"></div>
+      <div id="guide" class="guide-grid hidden"></div>
+      <div id="empty" class="empty hidden"></div>
+      <div id="loading" class="loading hidden"><div class="loader"><i></i><span>جاري التحميل…</span></div></div>
+    </div>
+  </main>
+</section>
+
+<!-- ===== DETAILS ===== -->
+<section id="details" class="screen hidden">
+  <div class="backdrop" id="d-backdrop"></div>
+  <button id="d-back" class="chip back" data-ic="prev">رجوع</button>
+  <div class="details-body">
+    <img id="d-poster" class="poster" alt="">
+    <div class="details-text">
+      <h2 id="d-title"></h2>
+      <div id="d-meta" class="accent"></div>
+      <div id="d-genre" class="muted"></div>
+      <div class="row">
+        <button id="d-play" class="primary" data-ic="play">تشغيل</button>
+        <button id="d-fav" class="chip icon" data-ic="star" title="المفضلة"></button>
+        <button id="d-later" class="chip" data-ic="later"> المشاهدة لاحقاً</button>
+        <button id="d-ext" class="chip icon" data-ic="external" title="فتح في مشغل خارجي"></button>
+        <button id="d-addgroup" class="chip" data-ic="plus">أضف لمجموعة</button>
+        <button id="d-trailer" class="chip hidden" data-ic="play">الإعلان</button>
+      </div>
+      <div id="d-resume" class="muted"></div>
+      <h3>القصة</h3><p id="d-plot"></p>
+      <p id="d-cast" class="muted"></p><p id="d-director" class="muted"></p><p id="d-source" class="muted small"></p>
+      <div id="d-similar-wrap" class="hidden"><h3>أعمال مشابهة</h3><div id="d-similar" class="shelf-row"></div></div>
+      <div id="d-episodes" class="hidden">
+        <h3>الحلقات</h3>
+        <input id="d-ep-search" placeholder="ابحث في الحلقات">
+        <div id="d-ep-list" class="list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLAYER ===== -->
+<section id="player" class="screen hidden">
+  <video id="video" autoplay></video>
+  <div id="p-overlay" class="p-overlay">
+    <div class="p-top">
+      <div class="p-id"><img id="p-logo" class="p-logo hidden" alt=""><div class="p-info"><div id="p-title" class="p-title"></div><div id="p-meta" class="p-meta hidden"></div><div id="p-epg" class="muted"></div><div id="p-prog" class="p-prog hidden"><span id="p-prog-a"></span><i><b></b></i><span id="p-prog-b"></span></div></div></div>
+      <div class="row p-top-acts">
+        <button id="p-mini" class="chip icon win-only hidden" data-ic="aspect" title="مشغّل صغير"></button>
+        <button id="p-ext" class="chip icon" data-ic="external" title="مشغل خارجي"></button>
+        <button id="p-close" class="chip icon" data-ic="close" title="إغلاق"></button>
+      </div>
+    </div>
+    <div class="p-bottom-wrap">
+      <div id="p-seek-row" class="p-seek-row">
+        <span id="p-cur" class="p-time">00:00</span>
+        <input id="p-seek" type="range" min="0" max="1000" value="0" class="p-seek">
+        <span id="p-dur" class="p-time">00:00</span>
+      </div>
+      <div class="p-bottom p-ctl">
+        <div class="p-grp p-grp-nav">
+          <button id="p-last" class="chip hidden" data-ic="history" title="آخر قناة (0)">آخر قناة</button>
+          <button id="p-prev" class="chip" data-ic="prev">القناة السابقة</button>
+          <button id="p-guide" class="chip" data-ic="guide">دليل البرامج</button>
+          <button id="p-next" class="chip" data-ic="next">القناة التالية</button>
+          <button id="p-skip" class="chip hidden" data-ic="skip">تخطي المقدمة</button>
+          <button id="p-next-ep" class="primary hidden" data-ic="episodes">الحلقة التالية</button>
+        </div>
+        <div class="p-grp p-grp-mid">
+          <button id="p-back10" class="chip icon" data-ic="back10" title="رجوع 10 ثوانٍ (←)"></button>
+          <button id="p-play" class="chip big icon" data-ic="pause" title="تشغيل/إيقاف (مسافة)"></button>
+          <button id="p-fwd10" class="chip icon" data-ic="fwd10" title="تقديم 10 ثوانٍ (→)"></button>
+        </div>
+        <div class="p-grp p-grp-tools">
+          <button id="p-tracks" class="chip" data-ic="subtitles">الصوت والترجمة</button>
+          <button id="p-more" class="chip" data-ic="filter">خيارات</button>
+          <button id="p-stream-info" class="chip icon" data-ic="info" title="معلومات البث" aria-label="معلومات البث"></button>
+          <button id="p-fs" class="chip icon" data-ic="fullscreen" title="ملء الشاشة"></button>
+          <span class="p-vol">
+            <button id="p-mute" class="chip icon" data-ic="volume" title="كتم (M)"></button>
+            <input id="p-volume" type="range" min="0" max="100" value="100" class="p-volume" title="مستوى الصوت (↑↓)">
+            <span id="p-vol-val" class="p-time">100%</span>
+          </span>
+        </div>
+      </div>
+      <div class="p-hint">◀ ▶ تقديم/رجوع (اضغط مطوّلاً للأسرع) أو تغيير القناة • OK تشغيل/إيقاف • ▲ ▼ الأزرار • الأخضر: دليل البرامج • الأزرق: الحلقة التالية • BACK خروج</div>
+    </div>
+    <pre id="p-guide-panel" class="guide hidden"></pre>
+  </div>
+  <div id="p-upnext" class="upnext hidden">
+    <div class="muted">الحلقة التالية خلال <b id="p-upnext-n">10</b></div>
+    <div id="p-upnext-title" class="upnext-title"></div>
+    <div class="row"><button id="p-upnext-go" class="primary" data-ic="play">تشغيل الآن</button><button id="p-upnext-cancel" class="chip">إلغاء</button></div>
+  </div>
+  <div id="p-spin" class="p-spin hidden"><i></i><span></span></div>
+  <div id="p-status" class="p-status hidden"></div>
+</section>
+
+<!-- ===== MULTI-SCREEN ===== -->
+<section id="multi" class="screen hidden">
+  <div id="m-grid" class="m-grid four">
+    <div class="m-slot" data-i="0"><video muted></video><div class="m-label"></div><div class="m-plus" data-ic="plus"></div></div>
+    <div class="m-slot" data-i="1"><video muted></video><div class="m-label"></div><div class="m-plus" data-ic="plus"></div></div>
+    <div class="m-slot" data-i="2"><video muted></video><div class="m-label"></div><div class="m-plus" data-ic="plus"></div></div>
+    <div class="m-slot" data-i="3"><video muted></video><div class="m-label"></div><div class="m-plus" data-ic="plus"></div></div>
+  </div>
+  <div class="m-bar">
+    <button id="m-pick" class="chip" data-ic="live">اختيار قناة</button>
+    <button id="m-toggle" class="chip">شاشتان</button>
+    <button id="m-big3" class="chip" title="كبيرة + 3">كبيرة + 3</button>
+    <button id="m-clear" class="chip">إفراغ الشاشة</button>
+    <button id="m-close" class="chip" data-ic="close">خروج</button>
+  </div>
+</section>
+
+<!-- ===== MODAL ===== -->
+<div id="saver" class="saver hidden"><div id="sv-bg" class="sv-bg on"></div><div id="sv-bg2" class="sv-bg"></div><div class="sv-shade"></div>
+  <canvas id="sv-particles" class="sv-particles"></canvas>
+  <div class="sv-clock"><div id="sv-time"></div><div id="sv-date"></div></div><div id="sv-matches" class="sv-matches"></div><div id="sv-title" class="sv-title"></div><img class="sv-logo" src="logo.svg" alt=""></div>
+<div id="modal" class="modal hidden"><div class="modal-card" id="modal-card"></div></div>
+<div id="focus-ring"></div>
+<div id="ambient-glow"></div>
+<div id="prayer-banner" class="hidden"></div>
+
+<script src="polyfills.js"></script>
+<script src="lib/hls.min.js"></script>
+<script src="lib/mpegts.js"></script>
+<script src="platform.js"></script>
+<script src="avplay.js"></script>
+<script src="effects.js"></script>
+<script src="i18n.js"></script>
+<script src="loginerrors.js"></script>
+<!-- 6.0 web-features APIs (web-features agent); guarded everywhere they're called -->
+<script src="i18n6.js"></script>
+<script src="imgcache.js"></script>
+<script src="epgstore.js"></script>
+<script src="layoutprefs.js"></script>
+<script src="streaminfo.js"></script>
+<script src="onboard.js"></script>
+<script src="fx3d.js"></script>
+<!-- 6.0 wave 4-5 modules (owned by other agents); app.js guards every HK_*/window.* use -->
+<script src="m3u.js"></script>
+<script src="chandb.js"></script>
+<script src="family6.js"></script>
+<script src="i18n-m3u.js"></script>
+<script src="prayer-cities.js"></script>
+<script src="prayer.js"></script>
+<script src="i18n-prayer.js"></script>
+<script src="remote6.js"></script>
+<script src="stalker.js"></script>
+<script src="accent.js"></script>
+<script src="theme.js"></script>
+<script src="i18n-portal.js"></script>
+<script src="icons.js"></script>
+<script src="merge.js"></script>
+<script src="epg.js"></script>
+<script src="spatial.js"></script>
+<script src="app.js"></script>
+<script src="licenses.js"></script>
+<script src="qrcode.js"></script>
+<script src="license.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+/* 6.0 restyle of secondary screens (guide, modals, settings, multi-screen, saver, states). Owned by agent web-screens3. Loaded after style.css.
+   Tokens only (tokens.css). Respects html.fx-full/.fx-lite/.fx-off and html.tv (+5% safe area, bigger type) and .lang-en (LTR mirror).
+   LG = Chrome 94: no :has(), no container queries, no CSS nesting, no subgrid; backdrop-filter gated to .fx-full. */
+
+/* ===== S5 — EPG guide: timeline rows, teal now-line, surface-hi programme blocks, focus ring ===== */
+#guide.guide-grid { background:var(--panel); }
+.ghead { background:var(--panel); border-bottom:1px solid var(--border); padding:var(--s-3) var(--s-4); }
+.gruler, .gch { background:var(--surface); border-bottom:1px solid var(--border); }
+.gch { border-inline-end:1px solid var(--border); border-left:0; }
+.gruler .gline span { border-inline-end:1px solid var(--border-soft); border-right:0; color:var(--muted); }
+.lang-en .gruler .gline span { border-left:0; }
+.grow { border-bottom:1px solid var(--border-soft); }
+.gnow { background:var(--accent); box-shadow:0 0 10px rgba(var(--accent-rgb),.65); }
+.gp { background:var(--surface-hi); border:1px solid var(--border); border-radius:var(--r-card); color:var(--fg-soft); }
+.gp.now { background:var(--accent-d); border-color:var(--accent); color:var(--on-accent); }
+.gp.now b, .gp.now small { color:var(--on-accent); }
+.gp.past { opacity:.5; }
+.gp:hover { border-color:var(--accent); }
+.kbd .gp.nav-hl { outline:none !important; box-shadow:0 0 0 3px var(--accent), 0 0 0 7px rgba(var(--accent-rgb),.22); opacity:1; z-index:3; }
+#guide > .loader { color:var(--muted); }
+
+/* ===== S6/S12/S13/S14/S15 — modal shell: grouped sections, teal primary / surface secondary, 18px radius, responsive ===== */
+.modal { background:var(--scrim); }
+.modal-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--r-dialog); box-shadow:var(--sh-lift); max-width:min(92vw, 480px); width:460px; padding:var(--s-5); gap:var(--s-3); }
+.modal-card h3 { font-size:var(--fs-h3); color:var(--fg); margin:0 0 var(--s-1); }
+.modal-card > p { color:var(--fg-2); font-size:var(--fs-small); line-height:1.6; margin:0; }
+.modal-card .section { color:var(--muted); font-size:var(--fs-tiny); letter-spacing:.02em; margin-top:var(--s-2); padding-inline:2px; }
+.modal-card .opt { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-button); padding:11px var(--s-4); color:var(--fg-soft); transition:border-color var(--t-focus) var(--ease-out), background-color var(--t-focus) var(--ease-out); }
+.modal-card .opt:hover { border-color:var(--accent); color:var(--fg); }
+.modal-card .opt.on { background:var(--accent-d); border-color:var(--accent); color:var(--on-accent); }
+.modal-card .opt.hist { background:var(--surface); }
+.modal-card input, .modal-card select { background:var(--bg-deep); border:1px solid var(--border); color:var(--fg); border-radius:var(--r-button); padding:11px var(--s-4); }
+.modal-card input:focus, .modal-card select:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(var(--accent-rgb),.2); }
+.modal-card .btns { margin-top:var(--s-2); gap:var(--s-2); }
+.modal-card .primary { background:var(--accent-d); border-radius:var(--r-button); }
+.modal-card .primary:hover { background:var(--accent); }
+.modal-card .chip { background:var(--surface); border:1px solid var(--border); color:var(--fg-soft); }
+.modal-card .chip:hover { border-color:var(--accent); color:var(--fg); }
+.kbd .opt.nav-hl { outline:none !important; box-shadow:0 0 0 3px var(--accent), 0 0 0 7px rgba(var(--accent-rgb),.2); border-color:var(--accent); }
+.kbd .opt.active.nav-hl, .kbd .opt.on.nav-hl { background:var(--accent-d); }
+/* small screens: dialogs never exceed the viewport, scroll inside instead */
+@media (max-width:480px), (max-height:560px) {
+  .modal-card { width:94vw; max-width:94vw; max-height:calc(var(--zvh, 1vh) * 88); padding:var(--s-4); border-radius:14px; }
+}
+.modal-card.s-compact { padding:var(--s-4) var(--s-5); gap:7px; }
+.s-acts .opt { background:var(--surface); }
+
+/* ===== S12 settings — licence / subscription state block ===== */
+.lic-state { color:var(--fg-soft); font-size:var(--fs-body); font-weight:700; }
+.lic-state.active { color:var(--accent); } .lic-state.expired { color:var(--danger); }
+.lic-warn { background:rgba(255,107,107,.1); border:1px solid rgba(255,107,107,.35); color:var(--fg-soft); border-radius:var(--r-card); padding:var(--s-3); }
+.lic-code { color:var(--accent); }
+.lic-qr img { background:#fff; border-radius:var(--r-card); }
+.lic-row .opt { background:var(--surface); }
+.primary-opt { background:var(--accent) !important; color:var(--on-accent) !important; border-color:var(--accent) !important; }
+.lic-dev { color:var(--muted); }
+
+/* ===== S15 — update window (normal + forced) ===== */
+.modal-card .btns .chip#u-x, .modal-card .btns .chip#u-c { background:var(--surface); }
+.modal-card .btns #u-dl { background:var(--accent-d); }
+.modal-card .btns #u-dl:hover { background:var(--accent); }
+
+/* ===== S13 — numpad / PIN dialog ===== */
+.numpad { background:var(--panel); border:1px solid var(--accent); border-radius:var(--r-dialog); box-shadow:var(--sh-lift); }
+.numpad b { color:var(--accent); }
+.numpad small { color:var(--fg-2); }
+
+/* ===== S7 — favourites / continue / later grids ===== */
+#content .card .prog { background:var(--accent); }
+.favsort { background:transparent; }
+.fs-row { border-bottom:1px solid var(--border-soft); }
+.fs-row .fs-n { color:var(--muted); }
+.fs-row img { border-radius:8px; background:var(--surface); }
+
+/* ===== S8 — search results, #epg-hits, search-history dropdown ===== */
+#epg-hits { padding:6px var(--s-3) var(--s-1); }
+#epg-hits h3 { font-size:var(--fs-h3); margin:var(--s-2) 4px var(--s-2); }
+#epg-hits .list .ep { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-card); color:var(--fg-soft); }
+#epg-hits .list .ep:hover { border-color:var(--accent); }
+.search-history { background:var(--panel); border:1px solid var(--border); border-radius:var(--r-card); box-shadow:var(--sh-lift); }
+.search-history button { color:var(--fg-2); border-radius:8px; }
+.search-history button:hover, .search-history button.nav-hl { background:var(--surface-hi); color:var(--fg); }
+/* #search-history is a sibling of .search-wrap in the toolbar, not its child, so style.css's
+   ".search-wrap{position:relative}" never anchors it (it was landing off the initial containing
+   block / below the viewport). Anchor it to the toolbar instead — report upstream to web-home3. */
+.toolbar { position:relative; }
+.search-history { top:calc(100% + 6px); }
+/* toolbar sits outside <main>, so it never got the 92px rail offset that #home main has (≥900px desktop/TV) —
+   the search box renders under the fixed nav rail and is unreachable. Defensive fix here; also reported upstream. */
+@media (min-width: 900px) { .toolbar { padding-inline-start: 92px; } .search-history { inset-inline-start: 92px; } }
+
+/* ===== S11 — multi-screen: thin teal active border, label chips, plus placeholder, chip bar ===== */
+#multi { background:var(--bg-deep); }
+.m-grid { gap:6px; padding:6px; }
+.m-slot { background:var(--surface); border:2px solid var(--border); border-radius:var(--r-card); }
+.m-slot.active { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset; }
+.m-label { background:rgba(11,17,23,.75); color:var(--fg-soft); border-radius:var(--r-pill); padding:4px var(--s-3); font-size:var(--fs-small); font-weight:700; border:1px solid var(--border-soft); }
+.m-plus { color:var(--border); }
+.m-slot.has .m-plus { display:none; }
+.m-bar { background:var(--bg-deep); border-top:1px solid var(--border-soft); gap:var(--s-2); padding:var(--s-3); }
+.m-bar .chip { background:var(--surface); border:1px solid var(--border); }
+.m-bar .chip:hover { border-color:var(--accent); }
+.kbd .m-slot.nav-hl { outline:none !important; box-shadow:0 0 0 3px var(--accent); }
+
+/* ===== S16 — screensaver: big light clock, particles canvas behind, title chip ===== */
+.saver { background:var(--bg-deep); }
+.sv-bg { filter:blur(3px) brightness(.5) saturate(1.05); }
+.fx-lite .sv-bg, .fx-off .sv-bg { filter:brightness(.5); }
+.sv-shade { background:linear-gradient(180deg, rgba(7,11,15,.18) 0%, rgba(7,11,15,.42) 55%, var(--bg-deep) 100%); }
+.sv-particles { z-index:0; }
+.sv-clock, .sv-matches, .sv-title { z-index:1; }
+#sv-time { color:var(--fg); font-weight:300; text-shadow:0 2px 24px rgba(0,0,0,.65); }
+#sv-date { color:var(--fg-2); }
+.sv-h { color:var(--heart); }
+.sv-m { background:rgba(17,26,33,.6); border:1px solid var(--border-soft); color:var(--fg); }
+.sv-m b { color:var(--accent); }
+.sv-m small { color:var(--muted); }
+.sv-title { display:inline-flex; align-items:center; background:rgba(17,26,33,.55); border:1px solid var(--border-soft); border-radius:var(--r-pill); padding:8px var(--s-4); color:var(--fg-soft); opacity:1; max-width:46vw; }
+.sv-logo { opacity:.7; }
+
+/* ===== S17 — empty / loading / hint / error states: friendlier skeleton look ===== */
+.empty, .loading { background:rgba(11,17,23,.72); color:var(--muted); }
+.empty { flex-direction:column; gap:var(--s-3); font-size:var(--fs-body); }
+.loader { color:var(--muted); }
+.loader i { border-color:rgba(255,255,255,.12); border-top-color:var(--accent); }
+#hint { background:var(--panel); color:var(--fg); border:1px solid var(--accent); border-radius:var(--r-dialog); }
+.errlist { color:var(--fg-2); }
+.gnone svg { color:var(--accent); }
+.gnone b { color:var(--fg); } .gnone p { color:var(--fg-2); }
+
+/* ===== S18 — OSS licences ===== */
+.osslist > div { background:var(--surface); border:1px solid var(--border-soft); border-radius:var(--r-card); }
+.osslist b { color:var(--fg); }
+.osslist .muted { color:var(--muted); }
+
+/* ===== S19 onboarding (onboard.js hk6-ob-*) — tour lives in .modal-card, keep it in step with the dialog shell ===== */
+.hk6-ob { max-width:min(92vw, 440px); }
+.hk6-dot { background:var(--border); }
+.hk6-dot.on { background:var(--accent); }
+.hk6-ob-title { color:var(--fg); }
+.hk6-ob-body { color:var(--fg-2); }
+.hk6-ob-actions button { border-radius:var(--r-button); border:1px solid var(--border); background:var(--surface); color:var(--fg-soft); }
+.hk6-ob-next { background:var(--accent) !important; color:var(--on-accent) !important; border-color:var(--accent) !important; }
+
+/* ===== S20 stream info (streaminfo.js hk6-stream-*) + layoutprefs dialog (layoutprefs.js hk6-lp-*) ===== */
+.hk6-stream { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-card); }
+.hk6-stream b { color:var(--fg); }
+.hk6-stream .hk6-diag { border-top:1px solid var(--border-soft); color:var(--accent); }
+.hk6-lp { max-width:min(92vw, 440px); }
+.hk6-lp-row { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-button); color:var(--fg-soft); }
+.hk6-lp-row.hk6-focus { outline:none; box-shadow:0 0 0 3px var(--accent), 0 0 0 7px rgba(var(--accent-rgb),.2); }
+.hk6-lp-row.hk6-move { outline:2px dashed var(--accent); }
+.hk6-lp-row.hk6-hidden { opacity:.5; }
+.hk6-lp-tag { color:var(--muted); }
+.hk6-lp button { border-radius:var(--r-button); border:1px solid var(--border); background:var(--surface); color:var(--fg-soft); }
+.hk6-lp button:focus { outline:2px solid var(--accent); }
+
+/* ===== TV: bigger type + 5% safe-area padding on every secondary screen/dialog ===== */
+html.tv .modal-card { padding:var(--s-6) var(--s-6); font-size:1.08em; }
+html.tv .modal-card h3 { font-size:calc(var(--fs-h3) * 1.08); }
+html.tv .gp b { font-size:calc(var(--fs-small) * 1.1); }
+html.tv .m-label { font-size:calc(var(--fs-small) * 1.1); }
+html.tv #sv-time { font-size:min(13vw, 165px); }
+html.tv #hint { font-size:1.1em; padding:var(--s-4) var(--s-6); }
+html.tv .saver, html.tv .numpad, html.tv .modal { padding-inline:2.5%; }
+
+/* ===== motion levels: only transform/opacity animate; backdrop-filter gated to fx-full ===== */
+.fx-full .modal-card { -webkit-backdrop-filter:saturate(1.1); }
+.fx-full #guide .gp.now { transition:box-shadow var(--t-focus) var(--ease-out); }
+.fx-off .hk6-ob, .fx-off .hk6-lp-row, .fx-off .gp, .fx-off .m-slot { transition:none !important; }
+
+/* ===== lang-en (LTR) mirrors for S5/S11/S16 ===== */
+html.lang-en .sv-title { text-align:start; }
+
+/* ===== web-int7 wiring: login tabs (Xtream/M3U/MAC) ===== */
+.l-type { display:flex; gap:6px; margin-bottom:var(--s-2); }
+.l-type .opt { flex:1; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-button); padding:9px; color:var(--fg-soft); text-align:center; }
+.l-type .opt.on { background:var(--accent-d); border-color:var(--accent); color:var(--on-accent); }
+.l-pane { display:flex; flex-direction:column; gap:var(--s-2); }
+.l-pane.hidden { display:none; }
+
+/* ===== web-int7 wiring: accent swatches (Settings → Appearance) ===== */
+.hk6-accents { display:flex; gap:10px; flex-wrap:wrap; }
+.hk6-accent-sw { width:34px; height:34px; border-radius:50%; border:2px solid var(--border); cursor:pointer; padding:0; }
+.hk6-accent-sw.on { border-color:#fff; box-shadow:0 0 0 2px var(--accent); }
+
+/* ===== web-int7 wiring: phone remote QR dialog ===== */
+.hk6-remote-qr { background:#fff; border-radius:var(--r-card); padding:10px; display:inline-block; }
+.hk6-remote-code { font-size:1.6em; letter-spacing:.12em; color:var(--accent); font-weight:800; }
+
+/* ===== web-int7 wiring: prayer settings + banner ===== */
+#prayer-banner { position:fixed; top:14px; inset-inline-end:14px; z-index:50; background:var(--panel); border:1px solid var(--accent); border-radius:var(--r-card); padding:8px 14px; color:var(--fg); font-size:var(--fs-small); box-shadow:var(--sh-lift); pointer-events:none; }
+#prayer-banner.hidden { display:none; }
+.fx-off #prayer-banner { transition:none; }
+
+/* ===== web-int7 wiring: multi-screen "big + 3" ===== */
+.m-grid.big3 { display:grid; grid-template-columns:2fr 1fr; grid-template-rows:1fr 1fr 1fr; gap:6px; }
+.m-grid.big3 .m-slot[data-i="0"] { grid-column:1; grid-row:1 / span 3; }
+.m-grid.big3 .m-slot[data-i="1"] { grid-column:2; grid-row:1; }
+.m-grid.big3 .m-slot[data-i="2"] { grid-column:2; grid-row:2; }
+.m-grid.big3 .m-slot[data-i="3"] { grid-column:2; grid-row:3; }
+
+/* ===== web-int7 wiring: floating single focus highlight (decision 0.33) ===== */
+#focus-ring { position:fixed; top:0; left:0; pointer-events:none; z-index:40; border-radius:var(--r-card); box-shadow:0 0 0 3px var(--accent), 0 0 24px -2px rgba(var(--accent-rgb),.6); opacity:0; will-change:transform,opacity; }
+html.fx-full #focus-ring { transition:transform 220ms cubic-bezier(.34,1.56,.64,1), opacity 160ms ease-out; }
+html.fx-lite #focus-ring { display:none; }   /* 6.0 QA: TVs (lite) keep the per-card glow — one moving layer less, no ghost ring */
+html.fx-off #focus-ring { display:none; }
+#focus-ring.on { opacity:1; }
+
+/* ===== web-int7 wiring: ambient tint glow behind focused/hovered card (fx-full only) ===== */
+#ambient-glow { position:fixed; inset:0; pointer-events:none; z-index:1; opacity:0; background:radial-gradient(600px 400px at var(--glow-x,50%) var(--glow-y,40%), rgba(var(--glow-rgb,70,216,209),.22), transparent 70%); }
+html.fx-full #ambient-glow.on { opacity:1; transition:opacity 260ms ease-out, background-color 260ms ease-out; }
+html.fx-lite #ambient-glow, html.fx-off #ambient-glow { display:none; }
+
+/* floating ring replaces the card's own glow ring while it is shown (fx-full) */
+html.ring-on.kbd .card.nav-hl { box-shadow:var(--lift); }
+
+/* 6.0 QA: hero without a wide backdrop — poster card beside the text over a dimmed copy of it */
+.hero.hero-poster .hero-bg { opacity:.28; background-position:center 30%; transform:scale(1.15); }
+html.fx-full .hero.hero-poster .hero-bg { filter:blur(18px) saturate(1.2); opacity:.5; }
+.hero.hero-poster.hk-in .hero-bg { animation:none; }
+.hero-art { position:absolute; z-index:1; top:12%; bottom:14%; inset-inline-end:7%; aspect-ratio:2/3; height:74%; width:auto; object-fit:cover;
+  border-radius:var(--r-card, 14px); box-shadow:0 30px 60px -20px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.08); }
+@media (max-width: 899px) { .hero-art { display:none; } .hero.hero-poster .hero-bg { opacity:.6; } }
+/* 6.0 QA: on the TV (lite/off: no floating ring) the focused card's glow was too faint to find from the sofa */
+html.fx-lite.kbd .card.nav-hl, html.fx-off.kbd .card.nav-hl { box-shadow:0 0 0 3px var(--accent), 0 0 22px -4px rgba(var(--accent-rgb),.7), var(--lift); }
+/* hero dots sat on top of the first shelf title */
+#home.home-dash .hero-dots { bottom:56px; inset-inline-start:auto; inset-inline-end:40px; }   /* far side from the text + buttons */
+#player:not(.hidden) ~ #ambient-glow, #multi:not(.hidden) ~ #ambient-glow { display:none; }

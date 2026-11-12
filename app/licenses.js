@@ -1,0 +1,12 @@
+/* 5.13.2 — open-source notices (Settings → «تراخيص المصادر المفتوحة»). Same list as Android OssLicenses.java and
+   https://sohbatna.com/licenses (which also carries the full licence texts). */
+window.OSS = [
+  { name: 'Cairo (font)', licence: 'SIL Open Font License 1.1', owner: 'Copyright 2009 The Cairo Project Authors' },
+  { name: 'Changa (font)', licence: 'SIL Open Font License 1.1', owner: 'Copyright 2018 The Changa Project Authors (https://github.com/googlefonts/changa-vf)' },
+  { name: 'Lucide (icons)', licence: 'ISC License', owner: 'Copyright (c) Lucide Icons and Contributors · icons derived from Feather: MIT, Copyright (c) 2013-present Cole Bemis' },
+  { name: 'hls.js', licence: 'Apache License 2.0', owner: 'Copyright (c) 2017 Dailymotion' },
+  { name: 'mpegts.js', licence: 'Apache License 2.0', owner: 'Copyright (C) 2021 magicxqq' },
+  { name: 'QR Code Generator for JavaScript', licence: 'MIT License', owner: 'Copyright (c) 2009 Kazuhiko Arase' },
+  { name: 'Electron (Windows)', licence: 'MIT License', owner: 'Copyright (c) Electron contributors · includes Chromium (BSD-3-Clause and others, see chrome://credits)' },
+];
+window.OSS_URL = 'https://sohbatna.com/licenses';

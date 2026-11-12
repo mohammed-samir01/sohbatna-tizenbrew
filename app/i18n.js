@@ -1,0 +1,125 @@
+/* Sohbatna i18n (5.7.0): Arabic is the source language; T(s) returns the English text when the UI language is English.
+ * The language lives in localStorage 'hk.lang' ('ar' | 'en') so it is known synchronously before app.js runs.
+ * Same dictionary is ported to Android (res/values-en/strings.xml + I18n.java). */
+(function (root) {
+  var LANG = 'ar';
+  try { LANG = localStorage.getItem('hk.lang') === 'en' ? 'en' : 'ar'; } catch (e) {}
+  var EN = {
+    // 5.14 premium design
+    'الحركة والتأثيرات': 'Motion & effects', 'الحركة': 'Motion', 'كاملة': 'Full', 'خفيفة': 'Light', 'بدون': 'None',
+    // 5.15 device tiers
+    'شخصي': 'Personal', 'عائلي': 'Family', 'زيادة عدد الأجهزة': 'Add more devices', 'الباقة العائلية: حتى': 'Family plan: up to', 'بنفس الكود': 'on the same code', 'الباقة العائلية: أجهزة أكثر بنفس الكود': 'Family plan: more devices on the same code', 'الكود مفعّل على كل الأجهزة المسموحة. أزل جهازاً قديماً من «صفحة اشتراكي» أو زوّد عدد الأجهزة.': 'This code is active on all the devices it allows. Remove an old device on “My subscription page” or add more devices.', 'الباقات': 'Plans', 'امسح الرمز بكاميرا هاتفك لزيادة عدد الأجهزة، ثم اضغط «تحديث الحالة».': 'Scan the code with your phone camera to add more devices, then press “Refresh status”.',
+    // 5.12 licence server
+    'تم إيقاف هذا الجهاز. تواصل مع الدعم:': 'This device has been blocked. Contact support:', 'محاولات كثيرة، حاول بعد دقيقة': 'Too many attempts, try again in a minute',
+    'الاشتراك المدفوع يُفتح قريباً. استمتع بالفترة التجريبية المجانية.': 'Paid plans open soon. Enjoy the free trial.',
+    'اشتراكي': 'My subscription', 'اعرف تاريخ الانتهاء والأجهزة المفعّلة، أو أرسل الكود إلى بريدك.': 'See the end date and activated devices, or email the code to yourself.', 'صفحة اشتراكي': 'My subscription page',
+    // 5.11 licence
+    'الفترة التجريبية': 'Free trial',
+    'اضغط رجوع مرة أخرى للخروج': 'Press Back again to exit', 'تعذر الاتصال بخادم الاشتراك': 'Could not reach the subscription server', 'تم تفعيل الاشتراك': 'Subscription activated', 'الفترة التجريبية تنتهي خلال': 'Your free trial ends in', 'يوم': 'days', 'حساب تجريبي — كل الميزات متاحة': 'Demo account — all features available', 'مفعّل': 'Activated', 'مشترك': 'Subscribed', 'سنوي': 'yearly', 'شهري': 'monthly', 'حتى': 'until', 'الأجهزة:': 'Devices:', 'الفترة التجريبية: متبقٍ': 'Free trial:', 'انتهى الاشتراك': 'Your subscription has ended', 'انتهت الفترة التجريبية': 'Your free trial has ended', 'جارٍ التحقق من الاشتراك…': 'Checking subscription…', 'رمز الدفع': 'Payment QR code', 'الاشتراك': 'Subscription', 'انتهت الفترة التجريبية. اشترك للاستمرار في استخدام التطبيق، أو أدخل كود التفعيل إن كان لديك اشتراك.': 'Your free trial has ended. Subscribe to keep using the app, or enter your activation code if you already have a subscription.', 'كود التفعيل لأجهزتك الأخرى:': 'Activation code for your other devices:', 'تجديد الاشتراك': 'Renew subscription', 'اشترك الآن': 'Subscribe now', 'جنيه': 'EGP', 'امسح الرمز بكاميرا هاتفك لإتمام الدفع، ثم اضغط «تحديث الحالة».': 'Scan the code with your phone camera to pay, then press “Refresh status”.', 'الدفع عبر الإنترنت': 'Pay online', 'لديك كود تفعيل؟': 'Have an activation code?', 'تفعيل': 'Activate', 'تحديث الحالة': 'Refresh status', 'رقم الجهاز:': 'Device ID:', 'جارٍ التحقق…': 'Checking…', 'الكود يتكون من 12 حرفاً ورقماً': 'The code has 12 letters and digits', 'جارٍ التفعيل…': 'Activating…', 'الكود غير صحيح': 'Invalid code', 'انتهت صلاحية هذا الكود': 'This code has expired', 'هذا الكود مستخدم على الحد الأقصى من الأجهزة': 'This code is already used on the maximum number of devices', 'تعذر التفعيل': 'Activation failed',
+    // login / header / tabs
+    'سجّل دخولك للوصول إلى محتواك': 'Sign in to reach your content', 'حجم الواجهة': 'Interface size', 'دليل البرامج (XMLTV)': 'TV guide (XMLTV)', 'رابط مخصّص': 'Custom link', 'من مزوّدك': 'From your provider', 'يُعرض الدليل من مزوّدك تلقائياً. إذا أعطاك مزوّدك رابط دليل برامج منفصلاً (XMLTV) فأضفه هنا. اتركه فارغاً لاستخدام دليل المزوّد.': "The guide comes from your provider automatically. If your provider gave you a separate guide link (XMLTV), add it here. Leave it empty to use your provider's guide.", 'الرابط يجب أن يبدأ بـ http:// أو https://': 'The link must start with http:// or https://', 'تعذر حفظ الرابط': 'Could not save the link', 'تم حفظ رابط الدليل': 'Guide link saved', 'سيُستخدم دليل مزوّدك': "Your provider's guide will be used", 'لا يتوفر دليل برامج لهذه القنوات': 'No TV guide for these channels', 'رابط الدليل المضاف لا يحتوي على هذه القنوات.': 'The guide link you added does not include these channels.', 'مزوّدك لا يرسل دليل برامج لهذه القنوات. إذا كان لديك رابط دليل (XMLTV) من مزوّدك فأضفه من إعدادات الحساب.': 'Your provider does not send a guide for these channels. If your provider gave you a guide link (XMLTV), add it in the account settings.', 'إضافة رابط دليل': 'Add a guide link', 'التطبيق مشغّل فقط ولا يقدّم أي قنوات أو محتوى. أضف بيانات اشتراكك القانوني لدى مزوّدك.': 'This app is a player only and provides no channels or content. Add the details of your lawful subscription with your provider.', 'دخول': 'Sign in', 'كل ترفيهك في مكان واحد': 'All your entertainment in one place',
+    'اسم الحساب (اختياري)': 'Account name (optional)', 'رابط السيرفر  http://host:port': 'Server URL  http://host:port', 'اسم المستخدم': 'Username', 'كلمة المرور': 'Password',
+    'أدخل رابط السيرفر واسم المستخدم وكلمة المرور': 'Enter the server URL, username and password', 'بيانات الدخول غير صحيحة أو الاشتراك غير فعّال': 'Wrong login details or inactive subscription',
+    'تعذر الاتصال بالسيرفر': 'Could not reach the server', 'خروج': 'Log out', 'الرئيسية': 'Home', 'مباشر': 'Live', 'دليل البرامج': 'TV Guide', 'المباريات': 'Matches', 'أفلام': 'Movies',
+    'مسلسلات': 'Series', 'المفضلة': 'Favourites', 'استكمال': 'Continue', 'فلتر': 'Filter', 'ابحث': 'Search', 'شاشات متعددة': 'Multi-view',
+    '⌕  ابحث عن فريق أو بطولة': '⌕  Search a team or competition', '⌕  ابحث في كل الأفلام والمسلسلات والقنوات': '⌕  Search all movies, series and channels', '⌕  ابحث في القسم الحالي': '⌕  Search this section',
+    // 5.8 favourite teams / now shelf / new episodes
+    'فرقي': 'My teams', 'حلقات جديدة': 'New episodes', 'حلقة جديدة': 'new episode', 'مباريات الآن': 'Matches now', 'أُزيل من فرقي:': 'Removed from my teams:', 'أُضيف إلى فرقي:': 'Added to my teams:', '— سيتم تذكيرك قبل كل مباراة': '— you will get a reminder before every match', 'استكمال المشاهدة': 'Resume watching', 'إزالة': 'Remove', 'إزالة من فرقي': 'Remove from my teams', 'إضافة إلى فرقي': 'Add to my teams', 'لا توجد مباريات لفرقك في الأيام القادمة': 'No matches for your teams in the coming days', 'لم تختر أي فريق بعد. افتح أي مباراة واختر ★ بجانب الفريق': 'No teams yet. Open any match and pick ☆ next to a team', 'حلقة جديدة:': 'New episode:', 'حلقات جديدة في': 'New episodes in', 'مسلسلات جديدة': 'series',
+    // 5.9.1 subtitles
+    'مسار الصوت': 'Audio track',
+    'تم الفتح في': 'Opened in', 'لا يوجد مشغّل فيديو مثبّت على الجهاز. ثبّت VLC (مجاني) وبعدها سيفتح هذا الزر الفيديو فيه مباشرة.': 'No video player is installed. Install VLC (free) and this button will open the video in it directly.', 'تحميل VLC': 'Download VLC', 'نسخ رابط الفيديو': 'Copy video link', 'تم نسخ الرابط': 'Link copied',
+    'ملف الترجمة فارغ أو غير صالح': 'The subtitle file is empty or unreadable', 'الترجمة: ': 'Subtitles: ', 'اسم المسلسل غير معروف — افتح الحلقة من صفحة المسلسل': 'Series name unknown — open the episode from the series page', 'جارٍ البحث عن ترجمة…': 'Searching for subtitles…', 'تعذر الاتصال بخدمة الترجمة': 'Could not reach the subtitle service', 'ترجمات من الإنترنت': 'Online subtitles', 'خدمة الترجمات غير مفعّلة بعد، وستعمل تلقائياً فور تفعيلها على الخادم دون الحاجة إلى تحديث.': 'Online subtitles are not set up yet. They will start working by themselves once the OpenSubtitles key is added on the server — no app update needed.', 'لا توجد ترجمة متاحة لهذا العنوان': 'No subtitles found for this title', 'جارٍ تحميل الترجمة…': 'Downloading subtitles…', 'تعذر تحميل الترجمة': 'Could not download the subtitles', 'الترجمة': 'Subtitles', 'من الملف': 'from the file', 'ملف ترجمة من الجهاز (.srt)': 'Subtitle file from this PC (.srt)', 'تم إيقاف الترجمة': 'Subtitles off', 'توقيت الترجمة': 'Subtitle timing', 'حجم الخط': 'Text size', 'صغير': 'Small', 'عادي': 'Normal', 'كبير': 'Large', 'كبير جداً': 'Extra large', 'لغة الترجمة المفضلة': 'Preferred subtitle language', 'توقيت الترجمة −/+ 0.1 ث': 'Subtitle timing −/+ 0.1 s',
+    // 5.9 favourites order / screensaver / shortcuts
+    'ترتيب': 'Reorder', 'ترتيب المفضلة': 'Reorder favourites', 'استخدم ▲ ▼ لتحريك العنصر، أو زر السهم فوق الخط لنقله إلى أول القائمة': 'Use ▲ ▼ to move an item, or the arrow-to-line button to move it to the top', 'إلى أول القائمة': 'Move to top', 'ترتيب حسب الإضافة': 'Order by date added', 'شاشة التوقف': 'Screensaver', '2 د': '2 min', '5 د': '5 min', '10 د': '10 min', '30 د': '30 min', 'اختصارات الكيبورد': 'Keyboard shortcuts', 'بحث': 'Search', 'التنقل بين الأقسام': 'Switch sections', 'النافذة فوق كل البرامج': 'Keep window on top', 'تشغيل / إيقاف مؤقت': 'Play / pause', 'تقديم وترجيع (القناة التالية في البث المباشر)': 'Seek (next channel when live)', 'الصوت': 'Volume', 'كتم الصوت': 'Mute', 'ملء الشاشة في المشغّل': 'Full screen in the player', 'رقم القناة (في البث المباشر)': 'Channel number (live)', 'سرعة التشغيل': 'Playback speed', 'ستبقى النافذة فوق كل البرامج': 'The window will stay on top', 'عادت النافذة إلى وضعها الطبيعي': 'The window is back to normal',
+    // catalogue
+    'القنوات': 'Channels', 'الأفلام': 'Movies', 'المسلسلات': 'Series', 'جميع': 'All', 'العربية': 'Arabic', 'الأجنبية': 'Foreign', 'بدون اسم': 'Untitled', 'حلقة': 'Episode', 'مسلسل': 'Series', 'فيلم': 'Movie',
+    'بث مباشر': 'Live', '·  بث مباشر': '·  Live', 'قنوات': 'Channels', 'تعذر تحميل التصنيفات:': 'Could not load categories:', 'تعذر تحميل المحتوى:': 'Could not load content:',
+    'لا توجد نتائج مطابقة للفلتر': 'Nothing matches the filter', 'لم تبدأ مشاهدة أي فيلم أو حلقة بعد': "You haven't started any movie or episode yet", 'لا يوجد محتوى': 'No content', 'لا توجد نتائج': 'No results',
+    'جاري تحميل المكتبة…': 'Loading library…', '٪': '%',
+    // home shelves
+    'متابعة المشاهدة': 'Continue watching', 'المشاهدة لاحقاً': 'Watch later', 'القنوات المفضلة': 'Favourite channels', 'شاهدت مؤخراً': 'Recently watched', 'أحدث الأفلام': 'Latest movies',
+    'أحدث المسلسلات': 'Latest series', 'أفلام عربية جديدة': 'New Arabic movies', 'مسلسلات عربية جديدة': 'New Arabic series', 'جديد': 'New', '▶ تشغيل': '▶ Play', 'ⓘ التفاصيل': 'ⓘ Details',
+    // filter
+    '⚲ الفلتر والترتيب': '⚲ Filter & sort', 'اللغة': 'Language', 'الكل': 'All', 'عربي': 'Arabic', 'أجنبي': 'Foreign', 'الترتيب': 'Sort', 'افتراضي': 'Default', 'الأحدث': 'Newest',
+    'أ←ي': 'A→Z', 'ي←أ': 'Z→A', 'التقييم': 'Rating', 'الحد الأدنى للتقييم': 'Minimum rating', 'أي': 'Any', 'سنة الإصدار': 'Release year', 'مثال: 2025': 'e.g. 2025', 'المفضلة فقط': 'Favourites only',
+    'القنوات التي تدعم الإعادة فقط': 'Catch-up channels only', 'تطبيق': 'Apply', 'مسح الكل': 'Clear all', 'إلغاء': 'Cancel',
+    // accounts / parental
+    'الحسابات': 'Accounts', 'إضافة حساب Xtream جديد': 'Add a new Xtream account', 'الرقابة الأبوية (PIN)': 'Parental control (PIN)', 'محتوى محمي': 'Protected content', 'أدخل رمز PIN': 'Enter PIN',
+    'فتح': 'Unlock', 'رمز PIN غير صحيح': 'Wrong PIN', 'الرقابة الأبوية': 'Parental control', 'تغيير رمز PIN': 'Change PIN', 'تفعيل الرقابة الأبوية (تعيين PIN)': 'Turn on parental control (set a PIN)',
+    'إلغاء الرقابة الأبوية': 'Turn off parental control', 'قفل/فتح تصنيفات القسم الحالي…': 'Lock/unlock categories of this section…', 'وضع الأطفال': 'Kids mode',
+    'تعيين رمز PIN': 'Set PIN', '4 أرقام أو أكثر': '4 digits or more', 'حفظ': 'Save', 'الرمز قصير جدًا': 'PIN is too short', 'تم حفظ رمز PIN': 'PIN saved', 'تم إلغاء الرقابة الأبوية': 'Parental control turned off',
+    'عيّن رمز PIN أولاً لتفعيل وضع الأطفال': 'Set a PIN first to turn on kids mode', 'تم تفعيل وضع الأطفال': 'Kids mode on', 'تم إيقاف وضع الأطفال': 'Kids mode off', 'التصنيفات المقفولة': 'Locked categories', 'تم': 'Done',
+    // details
+    'رجوع': 'Back', 'الإعلان': 'Trailer', 'القصة': 'Plot', 'أعمال مشابهة': 'More like this', 'الحلقات': 'Episodes', 'ابحث في الحلقات': 'Search episodes', 'فتح في مشغل خارجي': 'Open in external player',
+    'مشغل خارجي': 'External player', 'جاري التحميل…': 'Loading…', '▶ الحلقات': '▶ Episodes', 'في قائمتي': 'In my list', 'سيتم الاستكمال من': 'Resumes from', 'لا توجد قصة متاحة': 'No plot available',
+    'الممثلون:': 'Cast:', 'الإخراج:': 'Director:', 'تعذر تحميل التفاصيل': 'Could not load details', 'تعذر تحميل الحلقات': 'Could not load episodes', 'لا توجد حلقات': 'No episodes',
+    'معلومات إضافية من': 'Extra info from', 'الإنترنت': 'the web', 'أُضيفت إلى "المشاهدة لاحقاً"': 'Added to "Watch later"', 'أُزيلت من "المشاهدة لاحقاً"': 'Removed from "Watch later"',
+    // player
+    'آخر قناة': 'Last channel', 'آخر قناة (0)': 'Last channel (0)', 'القناة السابقة': 'Previous channel', 'القناة التالية': 'Next channel', 'تخطي المقدمة': 'Skip intro', 'الحلقة التالية': 'Next episode',
+    'الحلقة التالية خلال': 'Next episode in', 'الحلقة التالية:': 'Next episode:', 'تشغيل الآن': 'Play now', 'رجوع 10 ثوانٍ (←)': 'Back 10 s (←)', 'تقديم 10 ثوانٍ (→)': 'Forward 10 s (→)',
+    'تشغيل/إيقاف (مسافة)': 'Play/pause (space)', 'كتم (M)': 'Mute (M)', 'مستوى الصوت (↑↓)': 'Volume (↑↓)', 'ملء الشاشة': 'Fullscreen', 'خيارات': 'Options',
+    '◀ ▶ تقديم/رجوع (اضغط مطوّلاً للأسرع) أو تغيير القناة • OK تشغيل/إيقاف • ▲ ▼ الأزرار • الأخضر: دليل البرامج • الأزرق: الحلقة التالية • BACK خروج':
+      '◀ ▶ seek (hold for faster) or change channel • OK play/pause • ▲ ▼ buttons • GREEN: TV guide • BLUE: next episode • BACK exit',
+    'إعادة المحاولة': 'Retrying', 'السيرفر مشغول (': 'Server busy (', ') — جرّب بعد ثوانٍ': ') — try again in a few seconds', 'السيرفر مشغول — جرّب بعد ثوانٍ': 'Server busy — try again in a few seconds',
+    'تعذر تشغيل البث': 'Could not play the stream', 'توقف البث': 'Stream stopped', 'الإنترنت بطيء — تم التحويل إلى': 'Slow connection — switched to', 'تم التحويل إلى': 'Switched to', 'تلقائي': 'Auto', '· تلقائي': '· auto',
+    'الجودة': 'Quality', 'السرعة': 'Speed', 'أبعاد الصورة': 'Aspect ratio', 'ملاءمة': 'Fit', 'مؤقت النوم': 'Sleep timer', '— متبقٍ': '— left', 'دقيقة': 'min', 'إيقاف': 'Off', 'الصوت والترجمة': 'Audio & subtitles',
+    'لا توجد مسارات صوت أو ترجمة إضافية': 'No extra audio or subtitle tracks', 'مسار': 'Track', 'ترجمة': 'Subtitle', 'إيقاف الترجمة': 'Subtitles off', 'سيتوقف التشغيل بعد': 'Playback stops in',
+    'تم إيقاف مؤقت النوم': 'Sleep timer off', 'تم إيقاف التشغيل بواسطة مؤقت النوم': 'Stopped by the sleep timer', 'الآن:': 'Now:', '|   التالي:': '|   Next:', 'لا توجد بيانات': 'No data',
+    'دليل البرامج غير متاح': 'TV guide not available', 'دليل البرامج متاح': 'TV guide available', 'لا توجد بيانات EPG': 'No EPG data', 'لا توجد قناة بهذا الرقم': 'No channel with this number',
+    'لا توجد قناة بالرقم': 'No channel number', 'لا توجد قناة سابقة': 'No previous channel',
+    // guide / reminders / history
+    'السابق': 'Earlier', 'الآن': 'Now', 'التالي': 'Later', 'جاري تحميل دليل البرامج…': 'Loading TV guide…', 'تعذر تحميل دليل البرامج': 'Could not load the TV guide', 'تعذر تحميل القنوات': 'Could not load channels',
+    'لا توجد قنوات': 'No channels', 'ذكّرني': 'Remind me', 'إلغاء التذكير': 'Cancel reminder', 'تم إلغاء التذكير': 'Reminder cancelled', 'سيتم تذكيرك قبل البداية بدقيقة': "You'll be reminded a minute before it starts",
+    'تم التذكير': 'Reminder set', 'بدأ الآن:': 'Starting now:', 'على': 'on', 'مشاهدة': 'Watch', 'لاحقاً': 'Later', 'سجل المشاهدة': 'Watch history', 'لم تشاهد أي شيء بعد': "You haven't watched anything yet",
+    'مسح السجل': 'Clear history', 'تم مسح السجل': 'History cleared', 'إغلاق': 'Close', 'أمس': 'Yesterday', 'منذ': '', 'د': 'm', 'س': 'h', 'ث': 's',
+    // multi view
+    'اختيار قناة': 'Pick channel', 'إفراغ الشاشة': 'Clear screen', 'شاشتان': 'Two screens', 'أربع شاشات': 'Four screens', 'ابحث عن قناة…': 'Search a channel…',
+    // settings
+    'الإعدادات': 'Settings', 'العرض': 'Display', 'التشغيل': 'Playback', 'العائلة والصلاة': 'Family & prayer', 'الحساب والبيانات': 'Account & data', 'المساعدة': 'Help', 'فوق كل البرامج': 'Always on top', 'القسم الافتراضي': 'Start section', 'دمج نسخ القنوات': 'Merge channel copies', 'تشغيل': 'On', 'مزامنة الآن': 'Sync now', '— آخر مزامنة': '— last sync',
+'آخر مزامنة:': 'Last sync:',     'مسح الذاكرة المؤقتة': 'Clear cache', 'سجل الأخطاء': 'Error log', 'تراخيص المصادر المفتوحة': 'Open-source licences', 'يستخدم هذا التطبيق المكونات مفتوحة المصدر التالية وفق تراخيصها:': 'This app uses the following open-source components under their licences:', 'النصوص الكاملة للتراخيص:': 'Full licence texts:', 'التحقق من التحديثات': 'Check for updates', 'الرئيسية:': 'Home:', '· تغيير القناة:': '· Zap:',   // legacy key kept so any stray old string still resolves
+    '· التقديم:': '· Seek:', 'لا توجد أخطاء': 'No errors', 'مسح': 'Clear', 'تم دمج نسخ القنوات': 'Channel copies merged', 'تم إيقاف الدمج': 'Merging off', 'تم مسح الذاكرة المؤقتة': 'Cache cleared',
+    'جاري المزامنة…': 'Syncing…', 'تمت المزامنة': 'Synced', 'تعذرت المزامنة': 'Sync failed', 'أنت على آخر نسخة (': "You're on the latest version (", 'نسخة جديدة': 'New version', 'متاحة': 'available',
+    'تحميل': 'Download', 'اطلب التحديث من المطوّر': 'Ask the developer for the update', 'حمّل النسخة الجديدة من الموبايل أو الكمبيوتر من': 'Download the new version on your phone or computer from', 'وثبّتها بنفس طريقة التثبيت الأولى.': 'and install it the same way as the first time.', 'يجب تحديث التطبيق للاستمرار في استخدامه.': 'Please update the app to keep using it.', 'تعذر التحقق من التحديثات': 'Could not check for updates', 'لغة التطبيق': 'App language', 'English': 'English', 'العربية ': 'العربية',
+    // subscription
+    'الاشتراك: غير محدد المدة': 'Subscription: no expiry date', 'الاشتراك انتهى في': 'Subscription ended on', 'الاشتراك ينتهي': 'Subscription ends', '(باقي': '(', 'يوم)': 'days left)',
+    'الاشتراك انتهى': 'Subscription ended', 'ينتهي الاشتراك غداً': 'Subscription ends tomorrow', 'الاشتراك على وشك الانتهاء': 'Subscription ending soon',
+    'جدّد الاشتراك مع مزوّد الخدمة حتى لا تتوقف المشاهدة.': 'Renew with your provider so playback does not stop.', 'تمام': 'OK', 'تمديد': 'Extend',
+    // matches
+    'مباريات اليوم': "Today's matches", 'كل المباريات': 'All matches', 'مباشر الآن': 'Live now', 'اليوم': 'Today', 'غداً': 'Tomorrow', 'انتهت': 'FT', 'مؤجلة': 'Postponed', 'مؤجل': 'postponed',
+    'المباراة': 'Match', 'انتهت المباراة': 'The match is over', 'القناة الناقلة (': 'The broadcaster (', ') غير موجودة في اشتراكك': ') is not in your subscription',
+    'لا توجد قناة ناقلة معروفة لهذه المباراة': 'No known broadcaster for this match', 'لا توجد مباريات اليوم': 'No matches today', 'لا توجد مباريات': 'No matches', 'جاري تحميل المباريات…': 'Loading matches…',
+    'تعذر تحميل المباريات': 'Could not load matches', 'المواعيد والنتائج من FilGoal · تُحدَّث كل دقيقة': 'Fixtures and scores from FilGoal · updated every minute', '— تعليق': '— commentary:',
+    '،': ',',
+    // merge.js / platform.js
+    'أساسي': 'Base', 'حساب': 'Account',
+    // 6.0 home redesign: compact search, see-all, groups, continue-watching cards
+    'أضف لمجموعة': 'Add to group', 'عرض الكل': 'See all', 'متبقية': 'left', 'اختر مجموعة': 'Choose a group',
+    'لا يوجد عناصر في هذه المجموعة': 'No items in this group', 'تم الإضافة للمجموعة': 'Added to group',
+    // 7.0 rebrand: Hooksha/Hooksha IPTV -> Sohbatna (صحبتنا)
+    'صحبتنا': 'Sohbatna', 'عن التطبيق: صحبتنا': 'About: Sohbatna',
+    'إيقاف الريموت': 'Stop remote', 'الريموت اتقفل': 'Remote stopped', 'الريموت يفضل شغال بعد ما تقفل النافذة': 'The remote keeps working after you close this window',
+    'المظهر: الوضع': 'Appearance: mode', 'داكن': 'Dark', 'فاتح': 'Light', 'حسب الجهاز': 'Follow device',
+  };
+  function tr(s) {
+    if (LANG === 'ar' || s == null) return s;
+    s = String(s);
+    var m = /^(\s*)([\s\S]*?)(\s*)$/.exec(s), v = EN[m[2]];
+    if (v !== undefined) return m[1] + v + m[3];
+    if (s.indexOf('<') >= 0) return s.replace(/>([^<>]+)</g, function (a, t) { return '>' + tr(t) + '<'; }).replace(/(placeholder|title)="([^"]*)"/g, function (a, k, t) { return k + '="' + tr(t) + '"'; });
+    return s;
+  }
+  // static markup: text nodes + placeholder/title/aria-label attributes
+  function localizeDom(rootEl) {
+    if (LANG === 'ar') return;
+    var w = document.createTreeWalker(rootEl || document.body, NodeFilter.SHOW_TEXT, null, false), n, list = [];
+    while ((n = w.nextNode())) list.push(n);
+    list.forEach(function (t) { if (/[\u0600-\u06FF]/.test(t.nodeValue)) t.nodeValue = tr(t.nodeValue.replace(/\s+/g, ' ')); });
+    Array.prototype.forEach.call((rootEl || document).querySelectorAll('[placeholder],[title],[aria-label]'), function (el) {
+      ['placeholder', 'title', 'aria-label'].forEach(function (a) { var v = el.getAttribute(a); if (v && /[\u0600-\u06FF]/.test(v)) el.setAttribute(a, tr(v)); });
+    });
+  }
+  function setLang(l) { try { localStorage.setItem('hk.lang', l === 'en' ? 'en' : 'ar'); } catch (e) {} }
+  if (LANG === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; document.documentElement.classList.add('lang-en'); }
+  root.I18N = { lang: LANG, T: tr, localizeDom: localizeDom, setLang: setLang, dict: EN, locale: LANG === 'en' ? 'en-GB' : 'ar-EG' };
+  root.T = tr;
+})(typeof window !== 'undefined' ? window : this);
