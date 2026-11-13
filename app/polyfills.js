@@ -1,9 +1,1 @@
-/* Loaded FIRST. Runtime gaps on older webOS Chromium (68–87); no-ops on Electron. */
-(function (g) {
-  if (typeof globalThis === 'undefined') g.globalThis = g;
-  if (!Object.fromEntries) Object.fromEntries = function (it) { var o = {}; Array.from(it).forEach(function (kv) { o[kv[0]] = kv[1]; }); return o; };
-  if (!Array.prototype.flat) Object.defineProperty(Array.prototype, 'flat', { configurable: true, writable: true, value: function (d) { d = d === undefined ? 1 : d; return d < 1 ? this.slice() : this.reduce(function (a, v) { return a.concat(Array.isArray(v) ? v.flat(d - 1) : v); }, []); } });
-  if (!Array.prototype.flatMap) Object.defineProperty(Array.prototype, 'flatMap', { configurable: true, writable: true, value: function (f, t) { return this.map(f, t).flat(); } });
-  if (!String.prototype.replaceAll) String.prototype.replaceAll = function (a, b) { return a instanceof RegExp ? this.replace(a, b) : this.split(a).join(b); };
-  if (!Element.prototype.remove) Element.prototype.remove = function () { if (this.parentNode) this.parentNode.removeChild(this); };
-})(typeof window !== 'undefined' ? window : this);
+(function(i){typeof globalThis>"u"&&(i.globalThis=i),Object.fromEntries||(Object.fromEntries=function(t){var e={};return Array.from(t).forEach(function(r){e[r[0]]=r[1]}),e}),Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(t){return t=t===void 0?1:t,t<1?this.slice():this.reduce(function(e,r){return e.concat(Array.isArray(r)?r.flat(t-1):r)},[])}}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(t,e){return this.map(t,e).flat()}}),String.prototype.replaceAll||(String.prototype.replaceAll=function(t,e){return t instanceof RegExp?this.replace(t,e):this.split(t).join(e)}),Element.prototype.remove||(Element.prototype.remove=function(){this.parentNode&&this.parentNode.removeChild(this)})})(typeof window<"u"?window:this);
